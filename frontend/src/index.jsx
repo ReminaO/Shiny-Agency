@@ -3,6 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
+
 //Import des composants
 import './index.css'
 import Home from './pages/Home'
@@ -11,30 +12,26 @@ import Freelances from './pages/Freelances'
 import Results from './pages/Results'
 import Header from './components/Header'
 import Error from './components/Error'
-import { createGlobalStyle } from 'styled-components'
-
-const GlobalStyle = createGlobalStyle`
-    * {
-      font-family: 'Trebuchet MS', Helvetica, sans-serif;
-    }
-    body {
-      margin: 0;
-    }
-`
+import Footer from './components/Footer'
+import { ThemeProvider } from './utils/context'
+import GlobalStyle from '../src/utils/style/GlobalStyle'
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle />
     <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="survey/:questionNumber" element={<Survey />} />
-        <Route path="freelances" element={<Freelances />} />
-        <Route path="results" element={<Results />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </BrowserRouter>
+      <ThemeProvider>
+      <GlobalStyle />
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="survey/:questionNumber" element={<Survey />} />
+          <Route path="freelances" element={<Freelances />} />
+          <Route path="results" element={<Results />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+        <Footer />
+      </ThemeProvider>
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )
